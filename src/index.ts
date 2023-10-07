@@ -1,9 +1,9 @@
-import styles from "./styles.module.scss";
+import button from "./components/Button";
 
-console.log(styles);
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.querySelector("#app");
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div class="${styles.text}">
-    Hello, <span class="${styles.text_red}">world!</span>
-  </div>
-`;
+  const result = button({ buttonText: "Click me!" });
+
+  root!.innerHTML = result;
+});

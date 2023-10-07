@@ -1,7 +1,7 @@
 import Handlebars from "handlebars/runtime";
 import button from "./button.hbs";
 
-import "./styles.scss";
+import "./button.scss";
 
 Handlebars.registerPartial("button", button);
 

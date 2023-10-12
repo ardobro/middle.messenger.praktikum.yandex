@@ -4,7 +4,7 @@ type Callback = (...args: any[]) => void;
 
 type Listeners = Record<Event, Callback[]>;
 
-export class EventBus {
+class EventBus {
   private readonly listeners: Listeners;
 
   constructor() {
@@ -45,3 +45,5 @@ export class EventBus {
     });
   }
 }
+
+export default EventBus;

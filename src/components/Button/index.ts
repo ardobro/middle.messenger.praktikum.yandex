@@ -1,8 +1,24 @@
-import Handlebars from "handlebars/runtime";
+import Block from "../../utils/Block";
 import button from "./button.hbs";
 
 import "./button.scss";
 
-Handlebars.registerPartial("button", button);
+interface ButtonProps {
+  className?: string;
+  child?: string;
+  events?: {
+    click: () => void;
+  };
+}
 
-export default button;
+class Button extends Block<ButtonProps> {
+  constructor(props: ButtonProps) {
+    super("button", props);
+  }
+
+  render() {
+    return button(this.props);
+  }
+}
+
+export default Button;

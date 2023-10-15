@@ -1,9 +1,38 @@
-import button from "./components/Button";
+import renderDOM from "./utils/RenderDOM";
+import Button from "./components/Button";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const root = document.querySelector("#app");
-
-  const result = button({ buttonText: "Click me!" });
-
-  root!.innerHTML = result;
+const button = new Button({
+  className: "button",
+  child: "Click me!",
+  events: {
+    click: () => {
+      console.log("Clicked!");
+    },
+  },
 });
+
+renderDOM("#app", button);
+
+setTimeout(() => {
+  button.setProps({
+    className: "button",
+    child: "Updated!",
+    events: {
+      click: () => {
+        console.log("Clicked after updated props!");
+      },
+    },
+  });
+}, 5000);
+
+setTimeout(() => {
+  button.setProps({
+    className: "button",
+    child: "Updated twice!",
+    events: {
+      click: () => {
+        console.log("Clicked after updated props twice!");
+      },
+    },
+  });
+}, 10000);

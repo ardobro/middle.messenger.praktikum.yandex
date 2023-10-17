@@ -192,9 +192,9 @@ abstract class Block<P extends Record<string, any> = any> {
   }
 
   private _render() {
-    this._removeEvents();
-
     const fragment = this.render();
+
+    this._removeEvents();
 
     this._element!.innerHTML = "";
 

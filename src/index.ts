@@ -1,5 +1,6 @@
 import renderDOM from "./utils/RenderDOM";
 import Button from "./components/Button";
+import ProfilePage from "./components/ProfilePage";
 
 const button = new Button({
   className: "button",
@@ -11,7 +12,12 @@ const button = new Button({
   },
 });
 
-renderDOM("#app", button);
+const profilePage = new ProfilePage({
+  title: "Profile page",
+  button,
+});
+
+renderDOM("#app", profilePage);
 
 setTimeout(() => {
   button.setProps({

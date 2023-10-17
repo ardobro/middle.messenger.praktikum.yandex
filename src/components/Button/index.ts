@@ -9,6 +9,9 @@ interface ButtonProps {
   events?: {
     click: () => void;
   };
+  settings?: {
+    withInternalID?: boolean;
+  };
 }
 
 class Button extends Block<ButtonProps> {
@@ -17,7 +20,7 @@ class Button extends Block<ButtonProps> {
   }
 
   render() {
-    return button(this.props);
+    return this.compile(button, this.props);
   }
 }
 

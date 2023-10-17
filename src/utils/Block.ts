@@ -1,3 +1,4 @@
+import { v4 as makeUUID } from "uuid";
 import EventBus from "./EventBus";
 
 type TagName = keyof HTMLElementTagNameMap;
@@ -8,7 +9,7 @@ type Meta<Props> = {
   oldProps: Props;
 };
 
-class Block<P extends Record<string, any> & {} = any> {
+abstract class Block<P extends Record<string, any> = any> {
   private static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -16,22 +17,63 @@ class Block<P extends Record<string, any> & {} = any> {
     FLOW_RENDER: "flow:render",
   };
 
+  public _id = makeUUID();
+  protected props: P;
+  private children: Record<string, Block>;
   private eventBus: () => EventBus;
-  private _element!: HTMLElement;
+  private _element: HTMLElement | null = null;
   private meta: Meta<P>;
-  public props: P;
 
-  constructor(tagName: TagName = "div", props: P) {
+  constructor(tagName: TagName = "div", propsAndChildren: P) {
+    const { children, props } = this._getChildren(propsAndChildren);
+
+    this.children = children;
+
     const eventBus = new EventBus();
 
-    this.meta = { tagName, props, oldProps: {} as P };
+    this.meta = { tagName, props: props as P, oldProps: {} as P };
 
-    this.props = this._makePropsProxy(props);
+    this.props = this._makePropsProxy(props as P);
 
     this.eventBus = () => eventBus;
 
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
+  }
+
+  public compile(template: Handlebars.TemplateDelegate, props: any) {
+    const propsAndStubs = { ...props };
+
+    Object.entries(this.children).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    });
+
+    const fragment = document.createElement("template");
+
+    fragment.innerHTML = template(propsAndStubs);
+
+    Object.values(this.children).forEach((child) => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+
+      stub?.replaceWith(child.getContent()!);
+    });
+
+    return fragment.content;
+  }
+
+  private _getChildren(propsAndChildren: P) {
+    const children: Record<string, Block> = {};
+    const props: Record<string, unknown> = {};
+
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof Block) {
+        children[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+
+    return { children, props };
   }
 
   public setProps = (nextProps: P) => {
@@ -67,7 +109,7 @@ class Block<P extends Record<string, any> & {} = any> {
   }
 
   private _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -79,13 +121,24 @@ class Block<P extends Record<string, any> & {} = any> {
   }
 
   private _createDocumentElement(tagName: TagName) {
-    return document.createElement(tagName);
+    const element = document.createElement(tagName);
+
+    if (this.props?.setting?.withInternalID) {
+      element.setAttribute("data-id", this._id);
+    }
+
+    return element;
   }
 
-  private init() {
+  private _init() {
     this._createResources();
+
+    this.init();
+
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
+
+  protected init() {}
 
   private _componentDidMount() {
     this.componentDidMount();
@@ -95,7 +148,7 @@ class Block<P extends Record<string, any> & {} = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  public componentDidMount() {}
+  protected componentDidMount() {}
 
   private _componentDidUpdate(oldProps: P, newProps: P) {
     if (this.componentDidUpdate(oldProps, newProps)) {
@@ -120,7 +173,7 @@ class Block<P extends Record<string, any> & {} = any> {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      this._element.addEventListener(
+      this._element?.addEventListener(
         eventName,
         events[eventName as keyof typeof events]
       );
@@ -131,7 +184,7 @@ class Block<P extends Record<string, any> & {} = any> {
     const { events = {} } = this.meta.oldProps;
 
     Object.keys(events).forEach((eventName) => {
-      this._element.removeEventListener(
+      this._element?.removeEventListener(
         eventName,
         events[eventName as keyof typeof events]
       );
@@ -139,19 +192,19 @@ class Block<P extends Record<string, any> & {} = any> {
   }
 
   private _render() {
-    const fragment = this.render();
-
     this._removeEvents();
 
-    this._element!.innerHTML = fragment;
+    const fragment = this.render();
+
+    this._element!.innerHTML = "";
+
+    this._element!.append(fragment);
 
     this._addEvents();
-
-    // this._element!.append(fragment);
   }
 
-  public render(): string {
-    return "";
+  public render(): DocumentFragment {
+    return new DocumentFragment();
   }
 
   public show() {

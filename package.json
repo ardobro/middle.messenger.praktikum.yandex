@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/uuid": "^9.0.5",
     "handlebars": "^4.7.8",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "vite-svg-loader": "^4.0.0"
   }
 }

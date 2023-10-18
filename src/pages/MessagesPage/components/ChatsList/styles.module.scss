@@ -96,11 +96,23 @@
         &:hover {
             background-color: #363636;
         }
-    
+
         &[data-unread='false'] {
             .chat_title, .chat_last-message-datetime, .chat_message-preview {
                 color: #a5a5a5;
             }
         }
+    }
+
+    position: relative;
+
+    &:not(:last-child)::after {
+        background-color: $gray6;
+        content: '';
+        display: block;
+        height: 1px;
+        left: 76px;
+        position: absolute;
+        right: 16px;
     }
 }

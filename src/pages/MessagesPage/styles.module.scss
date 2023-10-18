@@ -57,11 +57,5 @@
 
     .main {
         background-color: $secondaryBackgroundColor;
-
-        .chat-view {
-            display: grid;
-            height: 100%;
-            place-content: center;
-        }
     }
 }

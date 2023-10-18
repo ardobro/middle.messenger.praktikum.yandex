@@ -15,7 +15,9 @@
                     {{#if unreadMessagesCount}}
                         <div class="{{../styles.chat_unread-messages-count}}">{{unreadMessagesCount}}</div>
                     {{else}}
-                        +
+                        <div class="{{../styles.chat_is-read-icon}}">
+                            {{{../messageReadIcon}}}
+                        </div>
                     {{/if}}
                 </div>
             </div>

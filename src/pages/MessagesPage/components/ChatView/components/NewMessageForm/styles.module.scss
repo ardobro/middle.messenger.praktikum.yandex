@@ -1,0 +1,72 @@
+.message-form {
+    align-items: center;
+    column-gap: 16px;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+
+    &_file-label {
+        border-radius: 12px;
+        display: grid;
+        cursor: pointer;
+        flex: 0 0 40px;
+        height: 40px;
+        place-content: center;
+        transition: background-color $delay-200 ease;
+
+        svg {
+            height: 24px;
+            width: 24px;
+
+            path {
+                fill: $gray1;
+                transition: fill $delay-200 ease;
+            }
+        }
+
+        &:hover {
+            background-color: $gray5;
+
+            .svg path {
+                fill: $white;
+            }
+        }
+    }
+
+    &_file-input {
+        display: none;
+    }
+
+    &_message-input {
+        flex: 1 1 auto;
+    }
+
+    &_submit-button {
+        @include outline;
+
+        border-radius: 12px 1.5rem 1.5rem 12px;
+        cursor: pointer;
+        display: grid;
+        flex: 0 0 40px;
+        height: 40px;
+        place-content: center;
+        transition: background-color $delay-200 ease;
+
+        svg {
+            height: 24px;
+            width: 24px;
+
+            path {
+                fill: $accentColor;
+                transition: fill $delay-200 ease;
+            }
+        }
+
+        &:hover {
+            background-color: $accentColor;
+
+            svg path {
+                fill: $white;
+            }
+        }
+    }
+}

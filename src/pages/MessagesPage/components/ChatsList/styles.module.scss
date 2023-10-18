@@ -81,7 +81,18 @@
             padding: 2px 6px;
             user-select: none;
         }
-    
+
+        &_is-read-icon {
+            svg {
+                height: 16px;
+                width: 16px;
+
+                path {
+                    fill: $accentColor;
+                }
+            }
+        }
+
         &:hover {
             background-color: #363636;
         }

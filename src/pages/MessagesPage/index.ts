@@ -4,6 +4,7 @@ import ChatsList from "./components/ChatsList";
 import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import Block from "../../utils/Block";
+import ChatView from "./components/ChatView";
 
 class MessagesPage extends Block {
   constructor(props: any) {
@@ -12,6 +13,9 @@ class MessagesPage extends Block {
       styles,
       settingsIcon,
       chatsList: new ChatsList({ items: chats }),
+      chatView: new ChatView({
+        username: "Jotari Kujo",
+      }),
     });
   }
 

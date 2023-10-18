@@ -2,6 +2,7 @@ import Handlebars from "handlebars/runtime";
 import Block from "../../../../utils/Block";
 import template from "./template.hbs";
 import styles from "./styles.module.scss";
+import messageReadIcon from "./static/message-read.svg?raw";
 
 // вынести на верхний уровень
 Handlebars.registerHelper("isPositive", (aString: string) => {
@@ -14,7 +15,7 @@ type Props = {
 
 class ChatsList extends Block<Props> {
   constructor(props: any) {
-    super("ul", { ...props, styles });
+    super("ul", { ...props, styles, messageReadIcon });
   }
 
   public render(): DocumentFragment {

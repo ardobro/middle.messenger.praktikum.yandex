@@ -1,7 +1,7 @@
-import Block from "../../utils/Block";
-import button from "./button.hbs";
+import template from "./template.hbs";
 
-import "./button.scss";
+import "./styles.scss";
+import Block from "../../utils/Block";
 
 interface ButtonProps {
   className?: string;
@@ -20,7 +20,7 @@ class Button extends Block<ButtonProps> {
   }
 
   render() {
-    return this.compile(button, this.props);
+    return this.compile(template, this.props);
   }
 }
 

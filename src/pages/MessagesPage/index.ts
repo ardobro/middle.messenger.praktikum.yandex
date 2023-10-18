@@ -1,9 +1,9 @@
-import Block from "../../utils/Block";
+import settingsIcon from "./static/settings.svg?raw";
 import chats from "./mocks/chats";
 import ChatsList from "./components/ChatsList";
 import template from "./template.hbs";
 import styles from "./styles.module.scss";
-import settingsIcon from "./static/settings.svg?raw";
+import Block from "../../utils/Block";
 
 class MessagesPage extends Block {
   constructor(props: any) {

@@ -5,8 +5,8 @@
     height: 100vh;
 
     .sidebar {
-        background-color: #252525;
-        border-right: 1px solid #3d3d3d;
+        background-color: $primaryBackgroundColor;
+        border-right: 1px solid $gray6;
         display: grid;
         grid-template-rows: auto auto 1fr;
         row-gap: 16px;
@@ -34,7 +34,7 @@
                 svg {
                     path {
                         fill: #a5a5a5;
-                        transition: fill 200ms ease;
+                        transition: fill $delay-200 ease;
                     }
 
                     height: 24px;
@@ -56,7 +56,7 @@
     }
 
     .main {
-        background-color: #1e1e1e;
+        background-color: $secondaryBackgroundColor;
 
         .chat-view {
             display: grid;

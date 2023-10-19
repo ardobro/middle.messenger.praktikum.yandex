@@ -7,6 +7,7 @@ import Block from "../../utils/Block";
 import ChatView from "./components/ChatView";
 
 class MessagesPage extends Block {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
     super("div", {
       ...props,

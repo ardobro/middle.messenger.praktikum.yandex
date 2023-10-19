@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { v4 as makeUUID } from "uuid";
 import EventBus from "./EventBus";
 
@@ -85,6 +86,7 @@ abstract class Block<P extends Record<string, any> = any> {
   };
 
   private _makePropsProxy(props: P) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
 
     return new Proxy<P>(props, {
@@ -161,6 +163,7 @@ abstract class Block<P extends Record<string, any> = any> {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public componentDidUpdate(_oldProps: P, _newProps: P) {
     return true;
   }

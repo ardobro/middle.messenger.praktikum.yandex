@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Handlebars from "handlebars/runtime";
 import Block from "../../../../utils/Block";
 import template from "./template.hbs";

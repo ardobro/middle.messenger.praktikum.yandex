@@ -3,7 +3,7 @@ export default [
     username: "Jotaro Kujo",
     datetime: "14:53",
     lastMessage:
-      "SHUT UP! Get outta my face, bitch! SHUT UP! Get outta my face, bitch! SHUT UP! Get outta my face, bitch!",
+      "SHUT UP! Get outta my face, bitch! SHUT UP!",
     unreadMessagesCount: "99+",
   },
   {

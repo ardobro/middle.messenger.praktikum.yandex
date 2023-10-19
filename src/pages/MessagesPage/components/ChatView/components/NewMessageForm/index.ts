@@ -5,6 +5,7 @@ import paperclipIcon from "./static/paperclip.svg?raw";
 import sendMessageIcon from "./static/send-message.svg?raw";
 
 class NewMessageForm extends Block {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
     super("form", { ...props, styles, paperclipIcon, sendMessageIcon });
   }

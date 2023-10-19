@@ -1,5 +1,6 @@
 type Event = string;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Callback = (...args: any[]) => void;
 
 type Listeners = Record<Event, Callback[]>;
@@ -37,7 +38,7 @@ class EventBus {
     );
   }
 
-  public emit(event: Event, ...args: any[]) {
+  public emit(event: Event, ...args: unknown[]) {
     this.checkEventExists(event);
 
     this.listeners[event].forEach((listener) => {

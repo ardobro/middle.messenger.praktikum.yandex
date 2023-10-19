@@ -8,8 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "npm run build && node ./server.js",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix *.ts *.js",
+    "lint": "eslint --ext .ts ./src",
+    "lint:fix": "eslint --ext .ts ./src --fix",
     "stylelint": "stylelint"
   },
   "engines": {
@@ -21,7 +21,6 @@
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "eslint": "^8.51.0",
-    "eslint-config-airbnb": "^19.0.4",
     "sass": "^1.69.0",
     "stylelint": "^15.11.0",
     "stylelint-scss": "^5.2.1",

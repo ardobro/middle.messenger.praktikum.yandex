@@ -9,6 +9,7 @@ type Props = {
 };
 
 class ChatView extends Block<Props> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
     super("div", {
       ...props,

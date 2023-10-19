@@ -8,14 +8,14 @@ enum METHOD {
 
 type Options = {
   method: METHOD;
-  data?: any;
+  data?: unknown;
   headers?: Record<string, string>;
   retries?: number;
 };
 
 type OptionsWithoutMethod = Omit<Options, "method">;
 
-function queryStringify(data: any) {
+function queryStringify(data: Record<string, unknown>) {
   if (!data) {
     return "";
   }
@@ -32,7 +32,7 @@ function queryStringify(data: any) {
 
 class HTTPTransport {
   get<T>(url: string, options: OptionsWithoutMethod = {}): Promise<T> {
-    const queryString = queryStringify(options.data);
+    const queryString = queryStringify(options.data as Record<string, unknown>);
 
     return this.request<T>(url + queryString, {
       ...options,
@@ -97,7 +97,7 @@ class HTTPTransport {
 function fetchWithRetry<T>(url: string, options: Options): Promise<T> {
   const { retries = 1 } = options;
 
-  return new HTTPTransport().get<T>(url, options).catch((error: any) => {
+  return new HTTPTransport().get<T>(url, options).catch((error: unknown) => {
     if (retries > 0) {
       return fetchWithRetry(url, { ...options, retries: retries - 1 });
     } else {

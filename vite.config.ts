@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import handlebars from "./vite-plugin-handlebars-precompile";
-import viteSvgLoader from "vite-svg-loader";
+import { defineConfig } from 'vite';
+import viteSvgLoader from 'vite-svg-loader';
+import handlebars from './vite-plugin-handlebars-precompile.ts';
 
 export default defineConfig({
   server: {

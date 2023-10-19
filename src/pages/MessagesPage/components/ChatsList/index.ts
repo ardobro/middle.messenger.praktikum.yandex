@@ -16,7 +16,11 @@ type Props = {
 
 class ChatsList extends Block<Props> {
   constructor(props: any) {
-    super("ul", { ...props, styles, messageReadIcon });
+    super("ul", {
+      ...props,
+      styles,
+      messageReadIcon,
+    });
   }
 
   public render(): DocumentFragment {

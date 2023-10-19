@@ -3,11 +3,20 @@ import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import paperclipIcon from "./static/paperclip.svg?raw";
 import sendMessageIcon from "./static/send-message.svg?raw";
+import Input from "../../../../../../components/Input";
 
 class NewMessageForm extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
-    super("form", { ...props, styles, paperclipIcon, sendMessageIcon });
+    super("form", {
+      ...props,
+      styles,
+      paperclipIcon,
+      sendMessageIcon,
+      input: new Input({
+        placeholder: "Start typing message",
+      }),
+    });
   }
 
   protected init(): void {

@@ -5,6 +5,8 @@ import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import Block from "../../utils/Block";
 import ChatView from "./components/ChatView";
+import Input from "../../components/Input";
+import searchIcon from "./static/search.svg?raw";
 
 class MessagesPage extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,6 +19,7 @@ class MessagesPage extends Block {
       chatView: new ChatView({
         username: "Jotari Kujo",
       }),
+      search: new Input({ placeholder: "Search", leftElement: searchIcon }),
     });
   }
 

@@ -83,7 +83,7 @@ class HTTPTransport {
 
       setTimeout(() => {
         reject("Timeout error");
-      });
+      }, timeout);
 
       if (method === METHOD.GET || !data) {
         xhr.send();

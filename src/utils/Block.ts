@@ -161,7 +161,7 @@ abstract class Block<P extends Record<string, any> = any> {
     }
   }
 
-  public componentDidUpdate(oldProps: P, newProps: P) {
+  public componentDidUpdate(_oldProps: P, _newProps: P) {
     return true;
   }
 

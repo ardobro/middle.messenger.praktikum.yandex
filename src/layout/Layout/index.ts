@@ -6,6 +6,7 @@ interface LayoutProps {
   loginPage: Block;
   messagesPage: Block;
   profilePage: Block;
+  registrationPage: Block;
 }
 
 class Layout extends Block {
@@ -28,6 +29,10 @@ class Layout extends Block {
       case "/profile":
         this.children.page = this.children.profilePage;
         document.title = "Profile";
+        break;
+      case "/registration":
+        this.children.page = this.children.registrationPage;
+        document.title = "Registration";
         break;
       default:
         break;

@@ -3,7 +3,7 @@ import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import logFieldsHandler from "../../utils/logFieldsHandler";
+import logSubmitHandler from "../../utils/logSubmitHandler";
 
 interface LoginPageProps {}
 
@@ -24,7 +24,7 @@ class LoginPage extends Block<LoginPageProps> {
       }),
       submitButton: new Button({ buttonText: "Sign in" }),
       events: {
-        submit: logFieldsHandler,
+        submit: logSubmitHandler,
       },
     });
   }

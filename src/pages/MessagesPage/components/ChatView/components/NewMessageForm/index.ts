@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 import paperclipIcon from "./static/paperclip.svg?raw";
 import sendMessageIcon from "./static/send-message.svg?raw";
 import Input from "../../../../../../components/Input";
-import logFieldsHandler from "../../../../../../utils/logFieldsHandler";
+import logSubmitHandler from "../../../../../../utils/logSubmitHandler";
 
 class NewMessageForm extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,7 +20,7 @@ class NewMessageForm extends Block {
         type: "text",
       }),
       events: {
-        submit: logFieldsHandler,
+        submit: logSubmitHandler,
       },
     });
   }

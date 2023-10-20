@@ -8,7 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 
 const loginPage = new LoginPage({});
 const messagesPage = new MessagesPage({});
-const profilePage = new ProfilePage({});
+const profilePage = new ProfilePage({ username: "Jojo" });
 const registrationPage = new RegistrationPage({});
 const notFoundErrorPage = new ErrorPage({
   title: "404",

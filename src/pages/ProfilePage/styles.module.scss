@@ -1,1 +1,60 @@
-.profile-page {}
+.profile-page {
+    background-color: $gray2;
+    display: grid;
+    height: 100vh;
+    place-content: center;
+
+    .profile-form {
+        display: grid;
+        row-gap: 32px;
+        width: 600px;
+
+        &_head {
+            display: grid;
+            justify-items: center;
+            row-gap: 8px;
+        }
+
+        &_username {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 28px;
+        }
+
+        &_avatar-label {
+            background-color: $gray1;
+            border-radius: 80px;
+            cursor: pointer;
+            display: grid;
+            height: 160px;
+            place-content: center;
+            width: 160px;
+
+            &:hover {
+                background-color: $red;
+            }
+        }
+
+        &_avatar-input {
+            display: none;
+        }
+
+        &_body {
+            display: grid;
+            row-gap: 8px;
+
+            .label {
+                @include text-14;
+
+                color: $gray1;
+                display: grid;
+                row-gap: 4px;
+            }
+        }
+
+        &_footer {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

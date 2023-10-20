@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 import paperclipIcon from "./static/paperclip.svg?raw";
 import sendMessageIcon from "./static/send-message.svg?raw";
 import Input from "../../../../../../components/Input";
+import logFieldsHandler from "../../../../../../utils/logFieldsHandler";
 
 class NewMessageForm extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,7 +16,12 @@ class NewMessageForm extends Block {
       sendMessageIcon,
       input: new Input({
         placeholder: "Start typing message",
+        name: "message",
+        type: "text",
       }),
+      events: {
+        submit: logFieldsHandler,
+      },
     });
   }
 

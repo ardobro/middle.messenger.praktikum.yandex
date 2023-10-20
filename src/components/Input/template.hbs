@@ -1,5 +1,7 @@
 {{#if leftElement}}
-<div class="{{styles.input_left-element}}">{{{leftElement}}}</div>
+    <div class="{{styles.input_left-element}}">{{{leftElement}}}</div>
 {{/if}}
-<input class="{{styles.input_input}}" type="{{type}}" placeholder="{{placeholder}}">
-{{{rightElement}}}
+<input class="{{styles.input_input}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" autocomplete="off">
+{{#if rightElement}}
+    <div class="{{styles.input_right-element}}">{{{rightElement}}}</div>
+{{/if}}

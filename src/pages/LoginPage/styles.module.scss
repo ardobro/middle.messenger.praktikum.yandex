@@ -1,1 +1,56 @@
-.login-page {}
+.login-page {
+    display: grid;
+    height: 100vh;
+    place-content: center;
+
+    .auth {
+        background-color: $gray2;
+        border: 1px solid $borderColor;
+        border-radius: 32px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        min-height: 480px;
+        max-height: 610px;
+        padding: 32px;
+        row-gap: 32px;
+        width: 400px;
+
+        &_title {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 28px;
+            text-align: center;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            &_body {
+                display: grid;
+                row-gap: 8px;
+            }
+
+            &_footer {
+                display: grid;
+                row-gap: 12px;
+            }
+
+            &_link {
+                @include outline;
+
+                color: $gray1;
+                font-weight: 400;
+                font-size: 12px;
+                justify-self: center;
+                line-height: 16px;
+                transition: color $delay-200 ease, outline-offset $delay-200 ease;
+
+                &:hover {
+                    color: $accentColor;
+                }
+            }
+        }
+    }
+}

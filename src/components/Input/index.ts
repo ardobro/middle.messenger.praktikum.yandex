@@ -6,6 +6,8 @@ interface InputProps {
   leftElement?: Block | string;
   placeholder?: string;
   rightElement?: Block | string;
+  name?: string;
+  type?: string;
 }
 
 class Input extends Block {

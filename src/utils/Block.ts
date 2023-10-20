@@ -20,7 +20,7 @@ abstract class Block<P extends Record<string, any> = any> {
 
   public _id = makeUUID();
   protected props: P;
-  private children: Record<string, Block>;
+  protected children: Record<string, Block>;
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
   private meta: Meta<P>;

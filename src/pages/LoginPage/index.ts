@@ -3,12 +3,7 @@ import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import Input from "../../components/Input";
 
-interface LoginPageProps {
-  loginInput: Block;
-  passwordInput: Block;
-  submitButton: Block;
-  styles: Record<string, string>;
-}
+interface LoginPageProps {}
 
 class LoginPage extends Block<LoginPageProps> {
   constructor(props: LoginPageProps) {

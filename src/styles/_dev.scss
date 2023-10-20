@@ -10,18 +10,18 @@
     transition: opacity $delay-200 ease;
     width: 200px;
 
-    &__title {
+    &_title {
         color: $black;
         font-weight: 600;
     }
 
-    &__list {
+    &_list {
         display: grid;
         margin-top: 16px;
         row-gap: 4px;
     }
 
-    &__link {
+    &_link {
         color: $black;
 
         &:hover {

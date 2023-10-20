@@ -11,7 +11,7 @@ import searchIcon from "./static/search.svg?raw";
 class MessagesPage extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
-    super("div", {
+    super("main", {
       ...props,
       styles,
       settingsIcon,

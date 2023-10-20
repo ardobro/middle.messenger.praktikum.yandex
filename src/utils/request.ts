@@ -68,7 +68,7 @@ class HTTPTransport {
   ): Promise<unknown> => {
     const { method, data, headers } = options;
 
-    return new Promise<T>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
       xhr.open(method, url);
@@ -80,7 +80,7 @@ class HTTPTransport {
       }
 
       xhr.onload = () => {
-        resolve(xhr as T);
+        resolve(xhr);
       };
 
       xhr.onabort = reject;

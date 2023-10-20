@@ -1,22 +1,21 @@
-import template from "./template.hbs";
-
-import "./styles.scss";
 import Block from "../../utils/Block";
+import template from "./template.hbs";
+import styles from "./styles.module.scss";
 
 interface ButtonProps {
-  className?: string;
-  child?: string;
+  buttonText?: string;
   events?: {
     click: () => void;
   };
-  settings?: {
-    withInternalID?: boolean;
-  };
 }
 
-class Button extends Block<ButtonProps> {
+class Button extends Block {
   constructor(props: ButtonProps) {
-    super("button", props);
+    super("button", { ...props, styles });
+  }
+
+  protected init(): void {
+    this.element?.setAttribute("class", styles.button);
   }
 
   render() {

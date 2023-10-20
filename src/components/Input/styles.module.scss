@@ -1,4 +1,6 @@
 .input {
+    @include outline-focus-within;
+
     align-items: center;
     border-radius: 12px;
     background: $black;
@@ -7,6 +9,7 @@
     height: 46px;
     padding: 8px 10px 8px 16px;
     position: relative;
+    transition: outline-offset $delay-200 ease;
     width: 100%;
 
     &_left-element, &_right-element {

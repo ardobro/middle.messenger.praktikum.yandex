@@ -21,7 +21,7 @@ class LoginPage extends Block<LoginPageProps> {
         name: "password",
         type: "password",
       }),
-      submitButton: new Button({ child: "Sign in" }),
+      submitButton: new Button({ buttonText: "Sign in" }),
     });
   }
 

@@ -1,0 +1,29 @@
+.button {
+    @include text-14;
+    @include outline;
+
+    background-color: $buttonBackgroundColor;
+    border: none;
+    border-radius: 12px;
+    color: $white;
+    cursor: pointer;
+    height: 50px;
+    padding: 12px 40px;
+    text-align: center;
+    transition: transform $delay-200 ease, background-color $delay-200 ease, outline-offset $delay-200 ease;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &:not(:disabled) {
+        &:active {
+            transform: scale(0.95);
+        }
+
+        &:hover {
+            background-color: darken($color: $buttonBackgroundColor, $amount: 20%);
+        }
+    }
+}

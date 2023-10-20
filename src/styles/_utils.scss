@@ -6,3 +6,12 @@
         outline-offset: 2px;
     }
 }
+
+@mixin outline-focus-within {
+    outline-offset: 4px;
+
+    &:focus-within {
+        outline: 2px solid $buttonBackgroundColor;
+        outline-offset: 2px;
+    }
+}

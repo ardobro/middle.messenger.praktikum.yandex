@@ -1,0 +1,30 @@
+.error-page {
+    display: grid;
+    height: 100vh;
+    place-content: center;
+
+    .error {
+        width: 1240px;
+
+        &_title {
+            font-size: 64px;
+            font-weight: 600;
+        }
+
+        &_description {
+            font-size: 36px;
+        }
+
+        &_link {
+            display: inline-block;
+            
+            @include outline;
+            @include text-20;
+
+            color: $accentColor;
+            justify-self: center;
+            margin-top: 32px;
+            transition: color $delay-200 ease, outline-offset $delay-200 ease;
+        }
+    }
+}

@@ -7,6 +7,8 @@ interface LayoutProps {
   messagesPage: Block;
   profilePage: Block;
   registrationPage: Block;
+  notFoundErrorPage: Block;
+  serverErrorPage: Block;
 }
 
 class Layout extends Block {
@@ -33,6 +35,14 @@ class Layout extends Block {
       case "/registration":
         this.children.page = this.children.registrationPage;
         document.title = "Registration";
+        break;
+      case "/404":
+        this.children.page = this.children.notFoundErrorPage;
+        document.title = "Not found";
+        break;
+      case "/500":
+        this.children.page = this.children.serverErrorPage;
+        document.title = "Server error";
         break;
       default:
         break;

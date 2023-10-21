@@ -1,7 +1,6 @@
 import Block from "../../utils/Block";
 import template from "./template.hbs";
 import styles from "./styles.module.scss";
-import Input from "../../components/TextInput";
 import Button from "../../components/Button";
 import logSubmitHandler from "../../utils/logSubmitHandler";
 import TextInput from "../../components/TextInput";

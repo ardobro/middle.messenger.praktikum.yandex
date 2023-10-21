@@ -3,7 +3,7 @@ import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import paperclipIcon from "./static/paperclip.svg?raw";
 import sendMessageIcon from "./static/send-message.svg?raw";
-import Input from "../../../../../../components/Input";
+import Input from "../../../../../../components/TextInput";
 import logSubmitHandler from "../../../../../../utils/logSubmitHandler";
 
 class NewMessageForm extends Block {

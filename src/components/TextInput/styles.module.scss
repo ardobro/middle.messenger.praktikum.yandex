@@ -1,0 +1,18 @@
+.text-input {
+    @include outline-focus-within;
+
+    border-radius: 12px;
+    background: $black;
+    column-gap: 10px;
+    padding: 0 10px;
+    position: relative;
+    transition: outline-offset $delay-200 ease;
+    width: 100%;
+
+    .error-message {
+        @include text-14;
+
+        color: $red;
+        padding-bottom: 10px;
+    }
+}

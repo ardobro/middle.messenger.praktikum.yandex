@@ -1,9 +1,9 @@
 import Block from "../../utils/Block";
 import template from "./template.hbs";
 import styles from "./styles.module.scss";
-import Input from "../../components/Input";
 import Button from "../../components/Button";
 import logSubmitHandler from "../../utils/logSubmitHandler";
+import TextInput from "../../components/TextInput";
 
 interface LoginPageProps {}
 
@@ -12,50 +12,94 @@ class RegistrationPage extends Block {
     super("main", {
       ...props,
       styles,
-      loginInput: new Input({
-        placeholder: "Login",
-        name: "login",
-        type: "text",
-      }),
-      firstNameInput: new Input({
-        placeholder: "First name",
-        name: "first_name",
-        type: "text",
-      }),
-      secondNameInput: new Input({
-        placeholder: "Second name",
-        name: "second_name",
-        type: "text",
-      }),
-      emailInput: new Input({
-        placeholder: "Email",
-        name: "email",
-        type: "email",
-      }),
-      phoneInput: new Input({
-        placeholder: "Phone",
-        name: "phone",
-        type: "phone",
-      }),
-      passwordInput: new Input({
-        placeholder: "Password",
-        name: "password",
-        type: "password",
-      }),
-      passwordAgainInput: new Input({
-        placeholder: "Password (again)",
-        name: "password-again",
-        type: "password",
-      }),
       submitButton: new Button({ buttonText: "Sign up" }),
       events: {
-        submit: logSubmitHandler,
+        submit: (e: Event) => {
+          logSubmitHandler(e);
+
+          Object.values(this.children).forEach((child) => {
+            if (child instanceof TextInput) {
+              child.validate();
+            }
+          });
+        },
       },
     });
   }
 
   protected init(): void {
     this.element?.setAttribute("class", styles["login-page"]);
+
+    this.children.loginInput = new TextInput({
+      type: "text",
+      name: "login",
+      placeholder: "Login",
+      pattern: /[a-zA-Z0-9-_]{3,20}/,
+      errorMessage:
+        // eslint-disable-next-line max-len
+        "От 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание).",
+    });
+
+    const namePattern = /^[А-ЯA-Z][а-яА-Яa-zA-Z-]*$/;
+    const nameErrorMessage =
+      // eslint-disable-next-line max-len
+      "Латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (только дефис).";
+
+    this.children.firstNameInput = new TextInput({
+      type: "text",
+      name: "first_name",
+      placeholder: "First name",
+      pattern: namePattern,
+      errorMessage: nameErrorMessage,
+    });
+
+    this.children.secondNameInput = new TextInput({
+      type: "text",
+      name: "second_name",
+      placeholder: "Second name",
+      pattern: namePattern,
+      errorMessage: nameErrorMessage,
+    });
+
+    this.children.emailInput = new TextInput({
+      type: "email",
+      name: "email",
+      placeholder: "Email",
+      pattern: /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/,
+      errorMessage:
+        // eslint-disable-next-line max-len
+        "Латиница, может включать цифры и спецсимволы вроде дефиса и подчёркивания, обязательно должна быть «собака» (@) и точка после неё, но перед точкой обязательно должны быть буквы.",
+    });
+
+    this.children.phoneInput = new TextInput({
+      type: "phone",
+      name: "phone",
+      placeholder: "phone",
+      pattern: /\+?\d{10,15}/,
+      errorMessage:
+        "От 10 до 15 символов, состоит из цифр, может начинается с плюса.",
+    });
+
+    const passwordPattern =
+      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))^[^ ]+$/;
+    const passwordErrorMessage =
+      "От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.";
+
+    this.children.passwordInput = new TextInput({
+      type: "password",
+      name: "password",
+      placeholder: "Password",
+      pattern: passwordPattern,
+      errorMessage: passwordErrorMessage,
+    });
+
+    this.children.passwordAgainInput = new TextInput({
+      type: "password",
+      name: "password-again",
+      placeholder: "Password (again)",
+      pattern: passwordPattern,
+      errorMessage: passwordErrorMessage,
+    });
   }
 
   public render(): DocumentFragment {

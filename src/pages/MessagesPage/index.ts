@@ -5,7 +5,7 @@ import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import Block from "../../utils/Block";
 import ChatView from "./components/ChatView";
-import Input from "../../components/Input";
+import Input from "../../components/TextInput";
 import searchIcon from "./static/search.svg?raw";
 
 class MessagesPage extends Block {

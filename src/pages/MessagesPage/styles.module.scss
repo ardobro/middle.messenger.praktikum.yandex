@@ -1,0 +1,65 @@
+.layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+
+    .sidebar {
+        background-color: $primaryBackgroundColor;
+        border-right: 1px solid $gray6;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        row-gap: 16px;
+        overflow: hidden;
+
+        &-header {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding: 0 16px;
+
+            &_title {
+                line-height: 30px;
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            &_link {
+                cursor: pointer;
+                display: grid;
+                flex: 0 0 24px;
+                place-content: center;
+
+                svg {
+                    path {
+                        fill: #a5a5a5;
+                        transition: fill $delay-200 ease;
+                    }
+
+                    height: 24px;
+                    width: 24px;
+
+                    &:hover {
+                        path {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+
+        &_search {
+            padding: 0 16px;
+        }
+
+        &_chats {
+            overflow: auto;
+            padding-bottom: 16px;
+        }
+    }
+
+    .main {
+        background-color: $secondaryBackgroundColor;
+    }
+}

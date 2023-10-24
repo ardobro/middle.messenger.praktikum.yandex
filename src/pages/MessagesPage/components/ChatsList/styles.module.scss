@@ -1,0 +1,118 @@
+.chats-list_item {
+    .chat {
+        display: flex;
+        column-gap: 12px;
+        cursor: pointer;
+        flex-wrap: nowrap;
+        padding: 20px 16px;
+        transition: background-color 200ms ease;
+
+        &_avatar-wrapper {
+            background-color: #a5a5a5;
+            border-radius: 1.5rem;
+            height: 48px;
+            position: relative;
+            width: 48px;
+        }
+    
+        &_avatar {
+            border-radius: inherit;
+        }
+
+        &_online-status {
+            background-color: #24A731;
+            border: 1px solid #252525;
+            border-radius: 1.5rem;
+            bottom: 0;
+            height: 12px;
+            position: absolute;
+            right: 0;
+            width: 12px;
+        }
+
+        &_body-wrapper {
+            display: grid;
+            flex: 1 1 auto;
+            row-gap: 4px;
+        }
+    
+        &_line {
+            align-items: center;
+            column-gap: 12px;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+    
+        &_title {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 18px;
+        }
+    
+        &_message-preview {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    
+        &_last-message-datetime {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 16px;
+        }
+    
+        &_unread-messages-count {
+            background-color: #ed5138;
+            border-radius: 10px;
+            display: inline-block;
+            font-feature-settings: 'tnum' on, 'lnum' on;
+            font-size: 12px;
+            font-weight: 500;
+            height: 20px;
+            line-height: 16px;
+            overflow: hidden;
+            text-align: center;
+            min-width: min-content;
+            padding: 2px 6px;
+            user-select: none;
+        }
+
+        &_is-read-icon {
+            svg {
+                height: 16px;
+                width: 16px;
+
+                path {
+                    fill: $accentColor;
+                }
+            }
+        }
+
+        &:hover {
+            background-color: #363636;
+        }
+
+        &[data-unread='false'] {
+            .chat_title, .chat_last-message-datetime, .chat_message-preview {
+                color: #a5a5a5;
+            }
+        }
+    }
+
+    position: relative;
+
+    &:not(:last-child)::after {
+        background-color: $gray6;
+        content: '';
+        display: block;
+        height: 1px;
+        left: 76px;
+        position: absolute;
+        right: 16px;
+    }
+}

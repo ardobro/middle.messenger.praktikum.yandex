@@ -1,4 +1,4 @@
-import renderDOM from "./utils/RenderDOM";
+import renderDOM from "./core/RenderDOM";
 import MessagesPage from "./pages/MessagesPage";
 import Layout from "./layout/Layout";
 import LoginPage from "./pages/LoginPage";

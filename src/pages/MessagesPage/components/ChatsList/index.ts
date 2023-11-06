@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Handlebars from "handlebars/runtime";
-import Block from "../../../../utils/Block";
+import Block from "../../../../core/Block";
 import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import messageReadIcon from "./static/message-read.svg?raw";

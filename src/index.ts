@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 // import RegistrationPage from "./pages/RegistrationPage";
 // import ErrorPage from "./pages/ErrorPage";
 import Router from "./core/Router";
+import RegistrationPage from "./pages/RegistrationPage";
 
 // const loginPage = new LoginPage({});
 // const messagesPage = new MessagesPage({});
@@ -41,5 +42,8 @@ enum Routes {
 const router = new Router("#app");
 
 window.addEventListener("DOMContentLoaded", async () => {
-  router.use(Routes.Index, LoginPage)?.start();
+  router
+    .use(Routes.Index, LoginPage)
+    ?.use(Routes.SignUp, RegistrationPage)
+    ?.start();
 });

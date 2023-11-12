@@ -7,6 +7,8 @@ import Block from "../../core/Block";
 import ChatView from "./components/ChatView";
 import TextInput from "../../components/TextInput";
 import searchIcon from "./static/search.svg?raw";
+import Link from "../../components/Link";
+import { Routes } from "../../enums/Routes";
 
 class MessengerPage extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,12 +16,25 @@ class MessengerPage extends Block {
     super({
       ...props,
       styles,
-      settingsIcon,
-      chatsList: new ChatsList({ items: chats }),
-      chatView: new ChatView({
-        username: "Jotari Kujo",
-      }),
-      search: new TextInput({ placeholder: "Search", leftElement: searchIcon }),
+    });
+  }
+
+  protected init(): void {
+    this.children.settingsLink = new Link({
+      content: settingsIcon,
+      to: Routes.Settings,
+      class: styles["sidebar-header_link"],
+    });
+
+    this.children.chatsList = new ChatsList({ items: chats });
+
+    this.children.chatView = new ChatView({
+      username: "Jotari Kujo",
+    });
+
+    this.children.search = new TextInput({
+      placeholder: "Search",
+      leftElement: searchIcon,
     });
   }
 

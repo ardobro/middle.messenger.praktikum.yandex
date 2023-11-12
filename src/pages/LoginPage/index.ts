@@ -5,10 +5,9 @@ import TextInput from "../../components/TextInput";
 import Button from "../../components/Button";
 import logSubmitHandler from "../../utils/logSubmitHandler";
 
-interface LoginPageProps {}
-
-class LoginPage extends Block<LoginPageProps> {
-  constructor(props: LoginPageProps) {
+class LoginPage extends Block {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(props: any) {
     super("main", {
       ...props,
       styles,

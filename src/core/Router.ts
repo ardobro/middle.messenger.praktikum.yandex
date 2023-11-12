@@ -20,6 +20,7 @@ class Router {
 
   public use(pathname: string, block: typeof Block) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+
     this.routes.push(route);
 
     return Router.__instance;
@@ -47,6 +48,7 @@ class Router {
     }
 
     this._currentRoute = route;
+
     route.render();
   }
 

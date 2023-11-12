@@ -4,11 +4,13 @@ import styles from "./styles.module.scss";
 import TextInput from "../../components/TextInput";
 import Button from "../../components/Button";
 import logSubmitHandler from "../../utils/logSubmitHandler";
+import Link from "../../components/Link";
+import { Routes } from "../../enums/Routes";
 
 class LoginPage extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
-    super("main", {
+    super({
       ...props,
       styles,
       submitButton: new Button({ buttonText: "Sign in" }),
@@ -27,8 +29,6 @@ class LoginPage extends Block {
   }
 
   protected init(): void {
-    this.element?.setAttribute("class", styles["login-page"]);
-
     this.children.loginInput = new TextInput({
       type: "text",
       name: "login",
@@ -46,6 +46,11 @@ class LoginPage extends Block {
       pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))^[^ ]+$/,
       errorMessage:
         "От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.",
+    });
+
+    this.children.authFormLink = new Link({
+      content: "Create account",
+      to: Routes.SignUp,
     });
   }
 

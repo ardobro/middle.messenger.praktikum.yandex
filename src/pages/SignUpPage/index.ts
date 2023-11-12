@@ -4,11 +4,13 @@ import styles from "./styles.module.scss";
 import Button from "../../components/Button";
 import logSubmitHandler from "../../utils/logSubmitHandler";
 import TextInput from "../../components/TextInput";
+import Link from "../../components/Link";
+import { Routes } from "../../enums/Routes";
 
 class RegistrationPage extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
-    super("main", {
+    super({
       ...props,
       styles,
       submitButton: new Button({ buttonText: "Sign up" }),
@@ -27,8 +29,6 @@ class RegistrationPage extends Block {
   }
 
   protected init(): void {
-    this.element?.setAttribute("class", styles["login-page"]);
-
     this.children.loginInput = new TextInput({
       type: "text",
       name: "login",
@@ -98,6 +98,11 @@ class RegistrationPage extends Block {
       placeholder: "Password (again)",
       pattern: passwordPattern,
       errorMessage: passwordErrorMessage,
+    });
+
+    this.children.authFormLink = new Link({
+      content: "I already have an account",
+      to: Routes.Index,
     });
   }
 

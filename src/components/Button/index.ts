@@ -11,11 +11,7 @@ interface ButtonProps {
 
 class Button extends Block {
   constructor(props: ButtonProps) {
-    super("button", { ...props, styles });
-  }
-
-  protected init(): void {
-    this.element?.setAttribute("class", styles.button);
+    super({ ...props, styles });
   }
 
   render() {

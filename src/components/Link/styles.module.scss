@@ -1,0 +1,14 @@
+.link {
+    @include outline;
+
+    color: $gray1;
+    font-weight: 400;
+    font-size: 12px;
+    justify-self: center;
+    line-height: 16px;
+    transition: color $delay-200 ease, outline-offset $delay-200 ease;
+
+    &:hover {
+        color: $accentColor;
+    }
+}

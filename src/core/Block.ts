@@ -2,10 +2,7 @@
 import { v4 as makeUUID } from "uuid";
 import EventBus from "./EventBus";
 
-type TagName = keyof HTMLElementTagNameMap;
-
 type Meta<Props> = {
-  tagName: TagName;
   props: Props;
   oldProps: Props;
 };
@@ -25,14 +22,14 @@ class Block<P extends Record<string, any> = any> {
   private _element: HTMLElement | null = null;
   private meta: Meta<P>;
 
-  constructor(tagName: TagName = "div", propsAndChildren: P) {
+  constructor(propsAndChildren: P) {
     const { children, props } = this._getChildren(propsAndChildren);
 
     this.children = children;
 
     const eventBus = new EventBus();
 
-    this.meta = { tagName, props: props as P, oldProps: {} as P };
+    this.meta = { props: props as P, oldProps: {} as P };
 
     this.props = this._makePropsProxy(props as P);
 
@@ -117,24 +114,7 @@ class Block<P extends Record<string, any> = any> {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  private _createResources() {
-    const { tagName } = this.meta;
-    this._element = this._createDocumentElement(tagName);
-  }
-
-  private _createDocumentElement(tagName: TagName) {
-    const element = document.createElement(tagName);
-
-    if (this.props?.setting?.withInternalID) {
-      element.setAttribute("data-id", this._id);
-    }
-
-    return element;
-  }
-
   private _init() {
-    this._createResources();
-
     this.init();
 
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -203,9 +183,13 @@ class Block<P extends Record<string, any> = any> {
 
     this._removeEvents();
 
-    this._element!.innerHTML = "";
+    const newElement = fragment.firstElementChild as HTMLElement;
 
-    this._element!.append(fragment);
+    if (this._element && newElement) {
+      this._element.replaceWith(newElement);
+    }
+
+    this._element = newElement;
 
     this._addEvents();
   }

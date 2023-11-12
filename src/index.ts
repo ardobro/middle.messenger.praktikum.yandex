@@ -6,7 +6,8 @@ import LoginPage from "./pages/LoginPage";
 // import RegistrationPage from "./pages/RegistrationPage";
 // import ErrorPage from "./pages/ErrorPage";
 import Router from "./core/Router";
-import RegistrationPage from "./pages/RegistrationPage";
+import SignUpPage from "./pages/SignUpPage";
+import { Routes } from "./enums/Routes";
 
 // const loginPage = new LoginPage({});
 // const messagesPage = new MessagesPage({});
@@ -32,18 +33,8 @@ import RegistrationPage from "./pages/RegistrationPage";
 
 // renderDOM("#app", layout);
 
-enum Routes {
-  Index = "/",
-  SignUp = "/sign-up",
-  Settings = "/settings",
-  Messenger = "/messenger",
-}
-
 const router = new Router("#app");
 
 window.addEventListener("DOMContentLoaded", async () => {
-  router
-    .use(Routes.Index, LoginPage)
-    ?.use(Routes.SignUp, RegistrationPage)
-    ?.start();
+  router.use(Routes.Index, LoginPage)?.use(Routes.SignUp, SignUpPage)?.start();
 });

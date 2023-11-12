@@ -11,15 +11,7 @@ interface InputProps {
 
 class Input extends Block {
   constructor(props: InputProps) {
-    super("input", props);
-  }
-
-  protected init(): void {
-    this.element?.setAttribute("class", styles.input);
-    this.element?.setAttribute("type", this.props.type);
-    this.element?.setAttribute("name", this.props.name);
-    this.element?.setAttribute("placeholder", this.props.placeholder);
-    this.element?.setAttribute("autocomplete", "off");
+    super({ ...props, styles });
   }
 
   public render(): DocumentFragment {

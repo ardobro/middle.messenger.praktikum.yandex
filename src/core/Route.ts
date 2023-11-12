@@ -19,17 +19,8 @@ class Route {
     this._props = props;
   }
 
-  public navigate(pathname: string) {
-    if (this.match(pathname)) {
-      this._pathname = pathname;
-      this.render();
-    }
-  }
-
   public leave() {
-    if (this._block) {
-      this._block.hide();
-    }
+    this._block = null;
   }
 
   public match(pathname: string): boolean {
@@ -38,8 +29,10 @@ class Route {
 
   public render() {
     if (!this._block) {
-      this._block = new this._blockClass("main", {});
+      this._block = new this._blockClass({});
+
       renderDOM(this._props.rootQuery, this._block);
+
       return;
     }
   }

@@ -15,7 +15,7 @@ interface InputProps {
 
 class TextInput extends Block {
   constructor(props: InputProps) {
-    super("label", { ...props, styles });
+    super({ ...props, styles });
   }
 
   get isValid(): boolean {
@@ -38,8 +38,6 @@ class TextInput extends Block {
 
   protected init(): void {
     this.validate = this.validate.bind(this);
-
-    this.element?.setAttribute("class", styles["text-input"]);
 
     this.props.showError = false;
 

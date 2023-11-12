@@ -10,7 +10,7 @@ type Meta<Props> = {
   oldProps: Props;
 };
 
-abstract class Block<P extends Record<string, any> = any> {
+class Block<P extends Record<string, any> = any> {
   private static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",

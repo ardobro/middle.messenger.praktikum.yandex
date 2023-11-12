@@ -5,14 +5,12 @@ import Button from "../../components/Button";
 import logSubmitHandler from "../../utils/logSubmitHandler";
 import TextInput from "../../components/TextInput";
 
-interface LoginPageProps {
-  username: string;
-}
-
-class ProfilePage extends Block {
-  constructor(props: LoginPageProps) {
-    super("main", {
+class SettingsPage extends Block {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(props: any) {
+    super({
       ...props,
+      username: "Artyom",
       styles,
       logoutButton: new Button({ buttonText: "Sign out" }),
       changeButton: new Button({ buttonText: "Change" }),
@@ -31,8 +29,6 @@ class ProfilePage extends Block {
   }
 
   protected init(): void {
-    this.element?.setAttribute("class", styles["profile-page"]);
-
     this.children.emailInput = new TextInput({
       type: "email",
       name: "email",
@@ -89,4 +85,4 @@ class ProfilePage extends Block {
   }
 }
 
-export default ProfilePage;
+export default SettingsPage;

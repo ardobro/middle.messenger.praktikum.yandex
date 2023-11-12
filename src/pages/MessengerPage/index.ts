@@ -5,13 +5,13 @@ import template from "./template.hbs";
 import styles from "./styles.module.scss";
 import Block from "../../core/Block";
 import ChatView from "./components/ChatView";
-import Input from "../../components/TextInput";
+import TextInput from "../../components/TextInput";
 import searchIcon from "./static/search.svg?raw";
 
-class MessagesPage extends Block {
+class MessengerPage extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
-    super("main", {
+    super({
       ...props,
       styles,
       settingsIcon,
@@ -19,7 +19,7 @@ class MessagesPage extends Block {
       chatView: new ChatView({
         username: "Jotari Kujo",
       }),
-      search: new Input({ placeholder: "Search", leftElement: searchIcon }),
+      search: new TextInput({ placeholder: "Search", leftElement: searchIcon }),
     });
   }
 
@@ -28,4 +28,4 @@ class MessagesPage extends Block {
   }
 }
 
-export default MessagesPage;
+export default MessengerPage;

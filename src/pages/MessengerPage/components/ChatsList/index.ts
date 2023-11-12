@@ -16,7 +16,7 @@ type Props = {
 
 class ChatsList extends Block<Props> {
   constructor(props: any) {
-    super("ul", {
+    super({
       ...props,
       styles,
       messageReadIcon,

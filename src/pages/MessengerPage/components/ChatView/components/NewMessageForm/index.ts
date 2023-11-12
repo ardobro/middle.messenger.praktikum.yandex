@@ -9,7 +9,7 @@ import logSubmitHandler from "../../../../../../utils/logSubmitHandler";
 class NewMessageForm extends Block {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
-    super("form", {
+    super({
       ...props,
       styles,
       paperclipIcon,
@@ -23,10 +23,6 @@ class NewMessageForm extends Block {
         submit: logSubmitHandler,
       },
     });
-  }
-
-  protected init(): void {
-    this.element?.setAttribute("class", styles["message-form"]);
   }
 
   public render(): DocumentFragment {

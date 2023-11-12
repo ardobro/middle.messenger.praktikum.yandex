@@ -11,16 +11,12 @@ type Props = {
 class ChatView extends Block<Props> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
-    super("div", {
+    super({
       ...props,
       styles,
       ellipsisVerticalIcon,
       newMessageForm: new NewMessageForm({}),
     });
-  }
-
-  protected init(): void {
-    this.element?.setAttribute("class", styles["chat-view"]);
   }
 
   public render(): DocumentFragment {

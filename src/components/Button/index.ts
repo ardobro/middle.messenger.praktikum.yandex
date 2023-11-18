@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 
 interface ButtonProps {
   buttonText?: string;
+  type?: string;
   events?: {
     click: () => void;
   };

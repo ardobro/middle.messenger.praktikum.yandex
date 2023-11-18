@@ -16,7 +16,7 @@ type Options = {
 type OptionsWithoutMethod = Omit<Options, "method">;
 
 type HTTPMethod = (
-  url: string,
+  path: string,
   options?: OptionsWithoutMethod
 ) => Promise<unknown>;
 
@@ -36,29 +36,48 @@ function queryStringify(data: Record<string, unknown>) {
 }
 
 class HTTPTransport {
-  get: HTTPMethod = (url, options = {}) => {
+  static API_URL = "https://ya-praktikum.tech/api/v2";
+  protected endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
+  }
+
+  get: HTTPMethod = (path, options = {}) => {
     const queryString = queryStringify(options.data as Record<string, unknown>);
 
-    return this.request(url + queryString, {
+    return this.request(this.endpoint + path + queryString, {
       ...options,
       method: METHOD.GET,
     });
   };
 
-  post: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHOD.POST });
+  post: HTTPMethod = (path, options = {}) => {
+    return this.request(this.endpoint + path, {
+      ...options,
+      method: METHOD.POST,
+    });
   };
 
-  put: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHOD.PUT });
+  put: HTTPMethod = (path, options = {}) => {
+    return this.request(this.endpoint + path, {
+      ...options,
+      method: METHOD.PUT,
+    });
   };
 
-  patch: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHOD.PATCH });
+  patch: HTTPMethod = (path, options = {}) => {
+    return this.request(this.endpoint + path, {
+      ...options,
+      method: METHOD.PATCH,
+    });
   };
 
-  delete: HTTPMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHOD.DELETE });
+  delete: HTTPMethod = (path, options = {}) => {
+    return this.request(this.endpoint + path, {
+      ...options,
+      method: METHOD.DELETE,
+    });
   };
 
   request = (
@@ -98,19 +117,5 @@ class HTTPTransport {
     });
   };
 }
-
-function fetchWithRetry(url: string, options: Options): Promise<unknown> {
-  const { retries = 1 } = options;
-
-  return new HTTPTransport().get(url, options).catch((error: unknown) => {
-    if (retries > 0) {
-      return fetchWithRetry(url, { ...options, retries: retries - 1 });
-    } else {
-      throw error;
-    }
-  });
-}
-
-export { fetchWithRetry };
 
 export default HTTPTransport;

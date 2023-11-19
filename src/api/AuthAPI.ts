@@ -30,19 +30,19 @@ class AuthAPI extends BaseAPI {
     super("/auth");
   }
 
-  signup(data: ISignUpData): Promise<unknown> {
+  signup(data: ISignUpData): Promise<void> {
     return this.http.post("/sign-up", { data });
   }
 
-  signin(data: ISignInData): Promise<unknown> {
+  signin(data: ISignInData): Promise<void> {
     return this.http.post("/sign-in", { data });
   }
 
   getUser(): Promise<User> {
-    return this.http.get("/user") as Promise<User>;
+    return this.http.get<User>("/user");
   }
 
-  logout() {
+  logout(): Promise<void> {
     return this.http.post("/logout");
   }
 }

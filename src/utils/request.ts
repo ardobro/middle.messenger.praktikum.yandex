@@ -15,11 +15,6 @@ type Options = {
 
 type OptionsWithoutMethod = Omit<Options, "method">;
 
-type HTTPMethod = (
-  path: string,
-  options?: OptionsWithoutMethod
-) => Promise<unknown>;
-
 function queryStringify(data: Record<string, unknown>) {
   if (!data) {
     return "";
@@ -43,48 +38,66 @@ class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  get: HTTPMethod = (path, options = {}) => {
-    const queryString = queryStringify(options.data as Record<string, unknown>);
+  public get<Response = void>(
+    path: string,
+    options?: OptionsWithoutMethod
+  ): Promise<Response> {
+    let queryString = "";
 
-    return this.request(this.endpoint + path + queryString, {
+    if (options?.data) {
+      queryString = queryStringify(options.data as Record<string, unknown>);
+    }
+
+    return this.request<Response>(this.endpoint + path + queryString, {
       ...options,
       method: METHOD.GET,
     });
-  };
+  }
 
-  post: HTTPMethod = (path, options = {}) => {
-    return this.request(this.endpoint + path, {
+  public post<Response = void>(
+    path: string,
+    options?: OptionsWithoutMethod
+  ): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, {
       ...options,
       method: METHOD.POST,
     });
-  };
+  }
 
-  put: HTTPMethod = (path, options = {}) => {
-    return this.request(this.endpoint + path, {
+  public put<Response = void>(
+    path: string,
+    options?: OptionsWithoutMethod
+  ): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, {
       ...options,
       method: METHOD.PUT,
     });
-  };
+  }
 
-  patch: HTTPMethod = (path, options = {}) => {
-    return this.request(this.endpoint + path, {
+  public patch<Response = void>(
+    path: string,
+    options?: OptionsWithoutMethod
+  ): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, {
       ...options,
       method: METHOD.PATCH,
     });
-  };
+  }
 
-  delete: HTTPMethod = (path, options = {}) => {
-    return this.request(this.endpoint + path, {
+  public delete<Response>(
+    path: string,
+    options?: OptionsWithoutMethod
+  ): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, {
       ...options,
       method: METHOD.DELETE,
     });
-  };
+  }
 
-  request = (
+  private request<Response>(
     url: string,
-    options: Options = { method: METHOD.GET },
-    timeout = 5000
-  ): Promise<unknown> => {
+    options: Options = { method: METHOD.GET }
+  ): Promise<Response> {
     const { method, data, headers } = options;
 
     return new Promise((resolve, reject) => {
@@ -98,16 +111,22 @@ class HTTPTransport {
         });
       }
 
-      xhr.onload = () => {
-        resolve(xhr);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
+        }
       };
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
+      xhr.onabort = () => reject({ reason: "abort" });
+      xhr.onerror = () => reject({ reason: "network error" });
+      xhr.ontimeout = () => reject({ reason: "timeout" });
 
-      setTimeout(() => {
-        reject("Timeout error");
-      }, timeout);
+      xhr.withCredentials = true;
+      xhr.responseType = "json";
 
       if (method === METHOD.GET || !data) {
         xhr.send();
@@ -115,7 +134,7 @@ class HTTPTransport {
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }
 
 export default HTTPTransport;
